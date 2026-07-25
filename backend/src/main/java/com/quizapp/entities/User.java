@@ -1,5 +1,6 @@
 package com.quizapp.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.quizapp.entities.enums.USER_ROLE;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -31,17 +32,21 @@ public class User extends BaseEntity {
 
 	// Courses taught by this instructor
 	@OneToMany(mappedBy = "instructor")
+	@JsonIgnore
 	private List<Course> coursesTaught = new ArrayList<>();
 
 	// Course enrollments for this student
 	@OneToMany(mappedBy = "student")
+	@JsonIgnore
 	private List<CourseEnrollment> enrollments = new ArrayList<>();
 
 	// Quiz attempts by this student
 	@OneToMany(mappedBy = "student")
+	@JsonIgnore
 	private List<QuizAttempt> quizAttempts = new ArrayList<>();
 
 	// Quizzes created by this instructor/admin
 	@OneToMany(mappedBy = "createdBy")
+	@JsonIgnore
 	private List<Quiz> quizzesCreated = new ArrayList<>();
 }
