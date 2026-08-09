@@ -33,6 +33,16 @@ public class Question extends BaseEntity {
     @Column(nullable = false)
     private Integer displayOrder;
 
+    @Column(columnDefinition = "TEXT")
+    private String explanation;
+
+    @Column(length = 100)
+    private String skillTag;
+
+    @Column(length = 20)
+    private String difficulty;
+
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("displayOrder ASC")
     private List<QuestionOption> options = new ArrayList<>();
 }

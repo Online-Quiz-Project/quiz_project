@@ -24,7 +24,7 @@ public class QuizAttempt extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
-    private User student;
+    private Student student;
 
     @Column(nullable = false)
     private LocalDateTime startedAt;
@@ -45,5 +45,6 @@ public class QuizAttempt extends BaseEntity {
     private ATTEMPT_STATUS status = ATTEMPT_STATUS.IN_PROGRESS;
 
     @OneToMany(mappedBy = "attempt", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AttemptAnswer> answers = new ArrayList<>();
+    private List<AttemptResponse> responses = new ArrayList<>();
+
 }
