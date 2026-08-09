@@ -28,7 +28,7 @@ public class CourseEnrollment extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "student_id", nullable = false)
-    private User student;
+    private Student student;
 
     @CreationTimestamp
     private LocalDateTime enrolledAt;

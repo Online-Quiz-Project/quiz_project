@@ -7,9 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Entity
 @Table(name = "users")
 @Getter
@@ -30,23 +27,11 @@ public class User extends BaseEntity {
 	@Column(nullable = false)
 	private USER_ROLE role;
 
-	// Courses taught by this instructor
-	@OneToMany(mappedBy = "instructor")
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
-	private List<Course> coursesTaught = new ArrayList<>();
+	private Student studentProfile;
 
-	// Course enrollments for this student
-	@OneToMany(mappedBy = "student")
+	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
-	private List<CourseEnrollment> enrollments = new ArrayList<>();
-
-	// Quiz attempts by this student
-	@OneToMany(mappedBy = "student")
-	@JsonIgnore
-	private List<QuizAttempt> quizAttempts = new ArrayList<>();
-
-	// Quizzes created by this instructor/admin
-	@OneToMany(mappedBy = "createdBy")
-	@JsonIgnore
-	private List<Quiz> quizzesCreated = new ArrayList<>();
+	private Instructor instructorProfile;
 }
