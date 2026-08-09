@@ -7,15 +7,15 @@ import lombok.Setter;
 
 @Entity
 @Table(
-        name = "attempt_answers",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"attempt_id", "question_id"})
-        }
+        name = "attempt_responses",
+        uniqueConstraints = @UniqueConstraint(
+                name = "uk_attempt_question",
+                columnNames = {"attempt_id", "question_id"})
 )
 @Getter
 @Setter
 @NoArgsConstructor
-public class AttemptAnswer extends BaseEntity {
+public class AttemptResponse extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "attempt_id", nullable = false)
@@ -29,8 +29,6 @@ public class AttemptAnswer extends BaseEntity {
     @JoinColumn(name = "selected_option_id")
     private QuestionOption selectedOption;
 
-    private Boolean isCorrect;
-
     @Column(nullable = false)
-    private Integer pointsEarned = 0;
+    private Boolean correct = false;
 }
